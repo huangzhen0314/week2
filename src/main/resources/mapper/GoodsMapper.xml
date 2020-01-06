@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huangzhen.mapper.GoodsMapper">
+
+	<insert id="add" parameterType="com.huangzhen.bean.Goods">
+		INSERT INTO goods
+		(id,guan,miaoshu,NAME,chan,addr,money,startd,yeard,statc,beizhu)
+		VALUES
+		(#{id},#{guan},#{miaoshu},#{name},#{chan},#{addr},#{money},#{startd},#{yeard},#{statc},#{beizhu})
+	</insert>
+
+	<select id="selAll" parameterType="map" resultType="com.huangzhen.bean.Goods">
+		select * from goods
+		<where>
+			<if test="id!=null and id!=''">
+				and id like "%${id}%"
+			</if>
+			<if test="guan!=null and guan!=''">
+				and guan like "%${guan}%"
+			</if>
+			<if test="miaoshu!=null and miaoshu!=''">
+				and miaoshu like "%${miaoshu}%"
+			</if>
+			<if test="name!=null and name!=''">
+				and name like "%${name}%"
+			</if>
+			<if test="chan!=null and chan!=''">
+				and chan like "%${chan}%"
+			</if>
+			<if test="addr!=null and addr!=''">
+				and addr like "%${addr}%"
+			</if>
+			<if test="money!=null and money!=''">
+				and money like "%${money}%"
+			</if>
+			<if test="st!=null and st!='' and end!=null and end!='' ">
+				and startd>${st} and ${end}>startd
+			</if>
+			<if test="statc!=null and statc!=''">
+				and statc like "%${statc}%"
+			</if>
+		</where>
+	</select>
+
+	<select id="selOne" parameterType="int" resultType="com.huangzhen.bean.Goods">
+		select * from goods where id=#{id}
+	</select>
+</mapper>
